@@ -23,3 +23,9 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
+
+
+## Useful Links
+- https://stackoverflow.com/questions/78136359/customizing-aws-amplify-login-page-placing-header-and-footer-outside-amplify-co
+- https://ui.docs.amplify.aws/react/connected-components/authenticator/customization
+- https://blog.kylegalbraith.com/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/
