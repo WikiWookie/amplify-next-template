@@ -29,3 +29,17 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 - https://stackoverflow.com/questions/78136359/customizing-aws-amplify-login-page-placing-header-and-footer-outside-amplify-co
 - https://ui.docs.amplify.aws/react/connected-components/authenticator/customization
 - https://blog.kylegalbraith.com/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/
+
+
+### Expectations
+- Can Use AWS Amplify to secure API endpoints and pages - WIP works in dummy repo - Done
+- Can see expected login page UI changes - WIP - move to another story?
+- Can log in - Done
+- Can log out - Done
+- Have example protected page - Don
+- Have example unprotected page - Done
+- Have example protected API - Done
+- Have example unprotected API - Done
+- Logging out should take you to the root page, but should then forward you to /login - Done
+
+NOTE: Middlware may prevent access to public images - fixed

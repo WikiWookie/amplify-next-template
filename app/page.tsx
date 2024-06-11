@@ -10,6 +10,8 @@ import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
+import { signOut } from "aws-amplify/auth";
+import router from 'next/router';
 
 Amplify.configure(outputs);
 
@@ -33,32 +35,56 @@ export default function App() {
       content: window.prompt("Todo content"),
     });
   }
-    
+
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
   }
 
+  // return (
+  //   // This uses a separate instance of the authenticator - different from the server login component
+  //   <Authenticator>
+  //     {({ signOut, user }) => (
+  //       <main>
+  //         <h1>My todos</h1>
+  //         <button onClick={createTodo}>+ new</button>
+  //         <ul>
+  //           {todos.map((todo) => (
+  //             <li key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</li>
+  //           ))}
+  //         </ul>
+  //         <div>
+  //           🥳 App successfully hosted. Try creating a new todo.
+  //           <br />
+  //           <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+  //             Review next steps of this tutorial.
+  //           </a>
+  //         </div>
+  //         <button onClick={signOut}>Sign out</button>
+  //       </main>
+  //     )}
+  //   </Authenticator>
+  // );
+
   return (
-    <Authenticator>
-       {({ signOut, user }) => (
-        <main>
-          <h1>My todos</h1>
-          <button onClick={createTodo}>+ new</button>
-          <ul>
-            {todos.map((todo) => (
-              <li key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</li>
-            ))}
-          </ul>
-          <div>
-            🥳 App successfully hosted. Try creating a new todo.
-            <br />
-            <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-              Review next steps of this tutorial.
-            </a>
-          </div>
-          <button onClick={signOut}>Sign out</button>
-        </main>
-       )}
-    </Authenticator>
+    <main>
+      <h1>My todos</h1>
+      <button onClick={createTodo}>+ new</button>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</li>
+        ))}
+      </ul>
+      <div>
+        🥳 App successfully hosted. Try creating a new todo.
+        <br />
+        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+          Review next steps of this tutorial.
+        </a>
+      </div>
+      <button onClick={async () => {
+        await signOut();
+        router.push("/login");
+      }}>Sign out</button>
+    </main>
   );
 }

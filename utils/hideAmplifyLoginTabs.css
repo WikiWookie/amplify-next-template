@@ -1,0 +1,4 @@
+/* This hides the Sign in/Sign up tabs on the top header */
+[role=tablist] {
+    display: none;
+}

@@ -1,21 +1,26 @@
 // https://aws.amazon.com/blogs/mobile/next-js-api-routes-with-aws-amplify/
-// const {Auth: ssrAuth} = withSSRContext({ req: request }); 
-// import { Amplify, withSSRContext } from "aws-amplify";
 
 import { getCurrentUser } from 'aws-amplify/auth/server';
 import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
-// import { runWithAmplifyServerContext } from '@/utils/amplifyServerUtils';
 import { runWithAmplifyServerContext } from '../../../utils/amplify-utils';
 
-// This request assume a valid cookie is supplied in the req
+// This request assumes a valid cookie is supplied in the req
 export async function GET(request: Request) {
-    const testReq = request;
-
+  try {
     const user = await runWithAmplifyServerContext({
-        nextServerContext: { cookies },
-        operation: (contextSpec) => getCurrentUser(contextSpec)
-      });
-    const test = { 'test': 'test'};
-    return Response.json(test);
+      nextServerContext: { cookies },
+      operation: (contextSpec) => getCurrentUser(contextSpec)
+    });
+  } catch (error: any) {
+    switch (true) {
+      case (error.name === "UserUnAuthenticatedException"): {
+        return new Response("", { status: 401, statusText: "Unauthorized" });
+      }
+      default: {
+        return new Response("", { status: 500, statusText: "Internal Server Error" });
+      }
+    }
+  }
+  const testResponse = { 'test': 'protected' };
+  return Response.json(testResponse);
 }

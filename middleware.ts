@@ -31,12 +31,15 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
-     * - api (API routes)
+     * - api (API routes) TODO: Implement separate API security
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - login
+     * - images (public/images but maps to /images)
+     * - unprotected - Front end route
+     * - api/protected
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|login|images|unprotected).*)", // Includes not protecting api routes
   ],
 };
