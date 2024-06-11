@@ -1,0 +1,7 @@
+/* .amplify-tabs {
+    display: none;
+} */
+
+[role=tablist] {
+    display: none;
+}
